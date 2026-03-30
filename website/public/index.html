@@ -1058,7 +1058,20 @@ const API = 'http://localhost:3000/api';
 // ══════════════════════════════════════════════
 // AI CONFIGURATION
 // ══════════════════════════════════════════════
-
+const AI_CONFIG = {
+  openai: {
+    enabled: true,
+    apiKey: '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',
+    model: 'gpt-3.5-turbo',
+    endpoint: 'https://api.openai.com/v1/chat/completions'
+  },
+  gemini: {
+    enabled: false,
+    apiKey: '',
+    model: 'gemini-pro',
+    endpoint: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent'
+  }
+};
 
 // Agent-specific system prompts
 const AGENT_PROMPTS = {
