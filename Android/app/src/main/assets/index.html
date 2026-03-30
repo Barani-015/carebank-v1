@@ -1516,6 +1516,254 @@
         if (barEl) barEl.style.width = `${Math.min(savingsRate, 100)}%`;
     }
 
+    // ========== ANDROID SMS INTEGRATION FUNCTIONS ==========
+// These functions are called from the Android WebView
+
+// Function to load SMS transactions from Android
+function loadSmsTransactions() {
+    console.log("loadSmsTransactions called");
+    try {
+        // Check if Android interface is available
+        if (window.AndroidSmsInterface) {
+            console.log("AndroidSmsInterface found, fetching transactions...");
+            const transactionsJson = window.AndroidSmsInterface.getSmsTransactions();
+            console.log("Received transactions:", transactionsJson);
+
+            if (transactionsJson && transactionsJson !== "[]" && transactionsJson !== "") {
+                const transactions = JSON.parse(transactionsJson);
+                if (transactions && transactions.length > 0) {
+                    // Convert Android SMS transactions to our format and add to existing data
+                    addSmsTransactionsToData(transactions);
+                }
+            }
+        } else {
+            console.log("AndroidSmsInterface not available - running in browser mode");
+        }
+    } catch (error) {
+        console.error("Error loading SMS transactions:", error);
+    }
+}
+
+// Function to refresh transactions from SMS
+function refreshTransactionsFromSms() {
+    console.log("refreshTransactionsFromSms called");
+    try {
+        if (window.AndroidSmsInterface) {
+            window.AndroidSmsInterface.refreshTransactions();
+            // Reload after refresh
+            setTimeout(() => {
+                loadSmsTransactions();
+            }, 500);
+        } else {
+            console.log("AndroidSmsInterface not available");
+        }
+    } catch (error) {
+        console.error("Error refreshing transactions:", error);
+    }
+}
+
+// Function to add a new transaction received in real-time
+function addNewTransaction(transactionJson) {
+    console.log("addNewTransaction called with:", transactionJson);
+    try {
+        const newTransaction = JSON.parse(transactionJson);
+
+        // Convert to our transaction format
+        const formattedTransaction = {
+            name: newTransaction.merchant || "Unknown Merchant",
+            amount: parseFloat(newTransaction.amount) || 0,
+            date: formatSmsDate(newTransaction.date),
+            category: newTransaction.category || "Other",
+            type: newTransaction.type || "debit",
+            status: newTransaction.status || "success",
+            isFromSms: true
+        };
+
+        // Add to top of transactions list
+        transactionsData.unshift(formattedTransaction);
+
+        // Refresh UI
+        renderTransactions();
+        updateChartWithNewData();
+        updateDashboardStats();
+
+        // Show notification
+        showImportStatus('info', `📱 New SMS: ${formattedTransaction.type === 'credit' ? '+' : '-'} ₹${formattedTransaction.amount} from ${formattedTransaction.name}`);
+
+        // Auto-hide notification after 3 seconds
+        setTimeout(() => {
+            const statusDiv = document.getElementById('importStatus');
+            if (statusDiv) statusDiv.style.display = 'none';
+        }, 3000);
+
+    } catch (error) {
+        console.error("Error adding new transaction:", error);
+    }
+}
+
+// Helper function to format SMS date
+function formatSmsDate(dateString) {
+    if (!dateString) return new Date().toLocaleDateString('en-GB', {day:'2-digit', month:'short', year:'numeric'});
+
+    // Check if it's already in the format "MMM dd" (like "Jan 15")
+    const shortMonthRegex = /^[A-Za-z]{3}\s+\d{1,2}$/;
+    if (shortMonthRegex.test(dateString)) {
+        // Add current year to short date
+        const currentYear = new Date().getFullYear();
+        return `${dateString} ${currentYear}`;
+    }
+
+    return dateString;
+}
+
+// Function to add SMS transactions to existing data
+function addSmsTransactionsToData(smsTransactions) {
+    if (!smsTransactions || smsTransactions.length === 0) return;
+
+    let addedCount = 0;
+    let duplicateCount = 0;
+
+    smsTransactions.forEach(smsTx => {
+        // Check if transaction already exists (by merchant + amount + date)
+        const isDuplicate = transactionsData.some(existingTx =>
+            existingTx.name === smsTx.merchant &&
+            Math.abs(existingTx.amount - smsTx.amount) < 0.01 &&
+            existingTx.date.includes(smsTx.date)
+        );
+
+        if (!isDuplicate) {
+            const formattedTransaction = {
+                name: smsTx.merchant || "Unknown",
+                amount: parseFloat(smsTx.amount) || 0,
+                date: formatSmsDate(smsTx.date),
+                category: smsTx.category || "Other",
+                type: smsTx.type || "debit",
+                status: smsTx.status || "completed",
+                isFromSms: true,
+                smsId: smsTx.id
+            };
+
+            // Only add if amount is valid
+            if (formattedTransaction.amount > 0) {
+                transactionsData.unshift(formattedTransaction);
+                addedCount++;
+            }
+        } else {
+            duplicateCount++;
+        }
+    });
+
+    if (addedCount > 0) {
+        // Refresh UI
+        renderTransactions();
+        updateChartWithNewData();
+        updateDashboardStats();
+
+        showImportStatus('success', `✅ Added ${addedCount} new SMS transactions! ${duplicateCount > 0 ? `(${duplicateCount} duplicates ignored)` : ''}`);
+
+        setTimeout(() => {
+            const statusDiv = document.getElementById('importStatus');
+            if (statusDiv) statusDiv.style.display = 'none';
+        }, 5000);
+    } else if (duplicateCount > 0) {
+        showImportStatus('info', `📱 No new SMS transactions found (${duplicateCount} duplicates)`);
+    }
+}
+
+// Override renderTransactions to show SMS badge
+const originalRenderTransactions = renderTransactions;
+renderTransactions = function() {
+    const container = document.getElementById('transactionsList');
+    if (!container) return;
+    if (!transactionsData.length) {
+        container.innerHTML = '<div style="text-align:center;padding:40px;color:#64748b">No transactions found.</div>';
+        return;
+    }
+    let totalCredit=0, totalDebit=0;
+    const html = transactionsData.map(tx => {
+        if (tx.type==='credit') totalCredit+=tx.amount; else totalDebit+=tx.amount;
+        const smsBadge = tx.isFromSms ? '<span style="background:#10b98120;color:#10b981;font-size:9px;padding:2px 6px;border-radius:10px;margin-left:6px;">📱</span>' : '';
+        return `<div class="compact-tx-item"><div class="compact-tx-left"><div class="compact-tx-icon ${tx.type==='credit'?'credit':'debit'}">${tx.type==='credit'?'↑':'↓'}</div><div class="compact-tx-info"><div class="compact-tx-name">${escapeHtml(tx.name)}${smsBadge}</div><div class="compact-tx-meta"><span class="compact-tx-date">${tx.date}</span><span class="compact-tx-category">${tx.category}</span></div></div></div><div class="compact-tx-right"><div class="compact-tx-status ${tx.status==='success'?'status-success':tx.status==='failed'?'status-failed':'status-warning'}">${tx.status==='success'?'✓':tx.status==='failed'?'✗':'⏳'}</div><div class="compact-tx-amount ${tx.type==='credit'?'credit':'debit'}">${tx.type==='credit'?'+':'-'}₹${tx.amount.toLocaleString()}</div></div></div>`;
+    }).join('');
+    container.innerHTML = html;
+    document.getElementById('totalCredit').textContent = totalCredit.toLocaleString();
+    document.getElementById('totalDebit').textContent = totalDebit.toLocaleString();
+    document.getElementById('transactionCount').textContent = transactionsData.length;
+};
+
+// Also override updateDashboardStats to work with SMS data
+const originalUpdateDashboardStats = updateDashboardStats;
+updateDashboardStats = function() {
+    let balance = 0, spending = 0, income = 0;
+    transactionsData.forEach(tx => {
+        if (tx.type === 'credit') {
+            balance += tx.amount;
+            income += tx.amount;
+        } else {
+            balance -= tx.amount;
+            spending += tx.amount;
+        }
+    });
+
+    const balanceEl = document.getElementById('balance-amount');
+    const spendingEl = document.getElementById('monthly-spending');
+    const rateEl = document.getElementById('savings-rate');
+    const barEl = document.getElementById('savings-bar');
+
+    if (balanceEl) balanceEl.textContent = `₹${balance.toLocaleString()}`;
+    if (spendingEl) spendingEl.textContent = `₹${spending.toLocaleString()}`;
+
+    const savingsRate = income > 0 ? Math.round((income - spending) / income * 100) : 0;
+    if (rateEl) rateEl.textContent = `${savingsRate}%`;
+    if (barEl) barEl.style.width = `${Math.min(savingsRate, 100)}%`;
+
+    // Update gauge value (wellness score based on savings rate)
+    const gaugeVal = document.getElementById('gauge-val');
+    if (gaugeVal) gaugeVal.textContent = savingsRate;
+
+    const gaugePath = document.getElementById('gauge-path');
+    if (gaugePath) {
+        const maxWidth = 166; // 173 - 7
+        const newWidth = 7 + (savingsRate / 100) * maxWidth;
+        gaugePath.setAttribute('x2', newWidth);
+    }
+
+    // Update wellness insight text
+    const insightEl = document.getElementById('wellness-insight');
+    if (insightEl) {
+        if (savingsRate >= 30) insightEl.textContent = "Excellent! You're saving more than 30% of your income! 🎉";
+        else if (savingsRate >= 20) insightEl.textContent = "Great job! You're maintaining a healthy savings rate! 💪";
+        else if (savingsRate >= 10) insightEl.textContent = "Good start! Try to increase your savings to 20% for better security 📈";
+        else insightEl.textContent = "Your savings rate is low. Consider reviewing your expenses to save more 💡";
+    }
+};
+
+// Add status-warning style if not present
+if (!document.querySelector('#status-warning-style')) {
+    const warningStyle = document.createElement('style');
+    warningStyle.id = 'status-warning-style';
+    warningStyle.textContent = '.status-warning{color:#f59e0b;}';
+    document.head.appendChild(warningStyle);
+}
+
+// Call loadSmsTransactions when dashboard loads
+const originalGoToDashboard = goToDashboard;
+goToDashboard = function() {
+    if (redirectTimer) { clearInterval(redirectTimer); redirectTimer=null; }
+    if (!sessionUser || !sessionPlan) { showScreen('authScreen'); return; }
+    populateDashboard(sessionUser, sessionPlan);
+    showScreen('dashboardScreen');
+    setTimeout(() => {
+        renderTransactions();
+        initChart();
+        renderProductRecommendations();
+        renderMonthlySummary();
+        updateCSVButtonState();
+        // Load SMS transactions after dashboard is ready
+        loadSmsTransactions();
+    }, 100);
+};
+
     function selectPlan(plan, el) { selectedPlan = plan; document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('selected')); el.classList.add('selected'); selectedPlanEl = el; }
     function confirmSubscription() { if (!selectedPlan) return; applyPlan(selectedPlan); showSuccessScreen(); }
     function applyPlan(planKey) { const p = PLAN_MAP[planKey]; sessionPlan = { ...sessionPlan, plan: p.name, planKey: planKey, price: p.price, billing: p.billing, emoji: p.emoji, isPremium: p.isPremium }; localStorage.setItem(SK_SUB, JSON.stringify(sessionPlan)); }
