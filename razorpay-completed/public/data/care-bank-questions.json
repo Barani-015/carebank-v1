@@ -1,0 +1,142 @@
+[
+  {
+    "question": "On which day did I spend the most?",
+    "intent": "max_spend_day",
+    "description": "Find the day with highest total debit",
+    "fields": ["date", "amount", "type"],
+    "filter": "type = debit",
+    "aggregation": "group_by(date) → sum(amount)",
+    "output": "max",
+    "response_template": "You spent the most on {{date}} with ₹{{amount}}."
+  },
+  {
+    "question": "Which category did I spend the most on?",
+    "intent": "max_category_spend",
+    "description": "Find category with highest expense",
+    "fields": ["category", "amount", "type"],
+    "filter": "type = debit",
+    "aggregation": "group_by(category) → sum(amount)",
+    "output": "max",
+    "response_template": "{{category}} is your highest spending category at ₹{{amount}}."
+  },
+  {
+    "question": "What is my total expense this month?",
+    "intent": "total_monthly_expense",
+    "description": "Calculate total debit for current month",
+    "fields": ["amount", "date", "type"],
+    "filter": "type = debit AND month = current",
+    "aggregation": "sum(amount)",
+    "output": "value",
+    "response_template": "Your total expense this month is ₹{{amount}}."
+  },
+  {
+    "question": "What is my total income this month?",
+    "intent": "total_monthly_income",
+    "description": "Calculate total credit for current month",
+    "fields": ["amount", "date", "type"],
+    "filter": "type = credit AND month = current",
+    "aggregation": "sum(amount)",
+    "output": "value",
+    "response_template": "Your total income this month is ₹{{amount}}."
+  },
+  {
+    "question": "What is my savings this month?",
+    "intent": "monthly_savings",
+    "description": "Income minus expenses",
+    "fields": ["amount", "type"],
+    "filter": "month = current",
+    "aggregation": "sum(credit) - sum(debit)",
+    "output": "value",
+    "response_template": "You saved ₹{{amount}} this month."
+  },
+  {
+    "question": "What is my savings rate?",
+    "intent": "savings_rate",
+    "description": "Savings divided by income",
+    "fields": ["amount", "type"],
+    "filter": "month = current",
+    "aggregation": "(sum(credit) - sum(debit)) / sum(credit)",
+    "output": "percentage",
+    "response_template": "Your savings rate is {{value}}%."
+  },
+  {
+    "question": "Am I spending more than last month?",
+    "intent": "compare_monthly_spend",
+    "description": "Compare this month vs previous month",
+    "fields": ["amount", "date", "type"],
+    "filter": "type = debit",
+    "aggregation": "sum(current_month) vs sum(previous_month)",
+    "output": "difference",
+    "response_template": "Your spending changed by {{value}}% compared to last month."
+  },
+  {
+    "question": "Where am I wasting money?",
+    "intent": "waste_detection",
+    "description": "Detect non-essential frequent expenses",
+    "fields": ["category", "amount", "frequency"],
+    "filter": "type = debit",
+    "aggregation": "identify_high_freq_small_spends",
+    "output": "list",
+    "response_template": "You are frequently spending on {{category}}, consider reducing it."
+  },
+  {
+    "question": "Is there any unusual transaction?",
+    "intent": "fraud_detection",
+    "description": "Detect anomalies in transaction data",
+    "fields": ["amount", "date", "category"],
+    "filter": "none",
+    "aggregation": "detect_outliers",
+    "output": "list",
+    "response_template": "We detected unusual transactions on {{date}} amounting ₹{{amount}}."
+  },
+  {
+    "question": "What is my financial risk level?",
+    "intent": "risk_score",
+    "description": "Analyze income vs expense stability",
+    "fields": ["income", "expense"],
+    "filter": "none",
+    "aggregation": "ratio_analysis",
+    "output": "score",
+    "response_template": "Your financial risk level is {{level}}."
+  },
+  {
+    "question": "What is my average daily spending?",
+    "intent": "avg_daily_spend",
+    "description": "Average debit per day",
+    "fields": ["date", "amount"],
+    "filter": "type = debit",
+    "aggregation": "sum(amount)/count(days)",
+    "output": "value",
+    "response_template": "Your average daily spending is ₹{{amount}}."
+  },
+  {
+    "question": "What is my highest transaction?",
+    "intent": "max_transaction",
+    "description": "Max debit transaction",
+    "fields": ["amount"],
+    "filter": "type = debit",
+    "aggregation": "max(amount)",
+    "output": "value",
+    "response_template": "Your highest transaction is ₹{{amount}}."
+  },
+  {
+    "question": "How much did I spend on food?",
+    "intent": "category_food_spend",
+    "description": "Food category total",
+    "fields": ["category", "amount"],
+    "filter": "category = Food AND type = debit",
+    "aggregation": "sum(amount)",
+    "output": "value",
+    "response_template": "You spent ₹{{amount}} on food."
+  },
+  {
+    "question": "How much did I spend on shopping?",
+    "intent": "category_shopping_spend",
+    "description": "Shopping total",
+    "fields": ["category", "amount"],
+    "filter": "category = Shopping AND type = debit",
+    "aggregation": "sum(amount)",
+    "output": "value",
+    "response_template": "You spent ₹{{amount}} on shopping."
+  }
+]
