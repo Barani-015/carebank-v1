@@ -1,0 +1,61 @@
+name,amount,date,category,type,status
+Freelance,22449,2024-03-04,Income,credit,failed
+Uber,4527,2024-03-27,Food,debit,failed
+Movie,2322,2024-03-11,Transport,debit,pending
+Electricity Bill,1143,2024-03-30,Transport,debit,success
+Electricity Bill,4777,2024-03-07,Food,debit,success
+Bonus,61554,2024-03-05,Income,credit,success
+Grocery,3594,2024-03-07,Bills,debit,failed
+Uber,836,2024-03-31,Entertainment,debit,pending
+Uber,4375,2024-03-04,Bills,debit,pending
+Bonus,22458,2024-03-02,Income,credit,success
+Movie,1110,2024-03-27,Bills,debit,pending
+Uber,4292,2024-03-06,Shopping,debit,success
+Uber,939,2024-03-19,Shopping,debit,success
+Uber,2736,2024-03-04,Entertainment,debit,failed
+Bonus,38896,2024-03-29,Income,credit,success
+Bonus,63910,2024-03-08,Income,credit,pending
+Pharmacy,415,2024-03-20,Food,debit,success
+Amazon,4682,2024-03-02,Food,debit,pending
+Amazon,3961,2024-03-01,Bills,debit,success
+Electricity Bill,2454,2024-03-28,Food,debit,pending
+Uber,1167,2024-03-22,Health,debit,success
+Movie,1662,2024-03-29,Health,debit,pending
+Electricity Bill,2516,2024-03-29,Health,debit,pending
+Grocery,3094,2024-03-10,Transport,debit,pending
+Movie,2596,2024-03-24,Transport,debit,failed
+Electricity Bill,1374,2024-03-09,Health,debit,failed
+Movie,3685,2024-03-29,Food,debit,failed
+Uber,2867,2024-03-26,Shopping,debit,pending
+Amazon,1682,2024-03-22,Transport,debit,failed
+Freelance,69005,2024-03-12,Income,credit,failed
+Pharmacy,3614,2024-03-19,Entertainment,debit,pending
+Grocery,1051,2024-03-29,Food,debit,failed
+Movie,1182,2024-03-08,Entertainment,debit,success
+Electricity Bill,2787,2024-03-25,Food,debit,pending
+Pharmacy,1211,2024-03-20,Health,debit,failed
+Electricity Bill,3393,2024-03-28,Transport,debit,success
+Grocery,4092,2024-03-16,Transport,debit,success
+Pharmacy,2920,2024-03-27,Health,debit,pending
+Electricity Bill,567,2024-03-15,Food,debit,pending
+Pharmacy,1046,2024-03-05,Food,debit,success
+Uber,4319,2024-03-18,Bills,debit,failed
+Electricity Bill,2259,2024-03-11,Transport,debit,success
+Pharmacy,3963,2024-03-08,Food,debit,failed
+Movie,2233,2024-03-16,Bills,debit,pending
+Uber,3541,2024-03-20,Bills,debit,pending
+Pharmacy,2326,2024-03-03,Food,debit,pending
+Electricity Bill,1831,2024-03-15,Bills,debit,pending
+Uber,4519,2024-03-27,Transport,debit,failed
+Electricity Bill,2301,2024-03-02,Transport,debit,pending
+Bonus,41156,2024-03-27,Income,credit,failed
+Grocery,1483,2024-03-16,Shopping,debit,pending
+Uber,2962,2024-03-20,Health,debit,success
+Grocery,2606,2024-03-02,Entertainment,debit,pending
+Freelance,20075,2024-03-14,Income,credit,success
+Grocery,3597,2024-03-15,Transport,debit,pending
+Uber,2108,2024-03-14,Health,debit,failed
+Amazon,3694,2024-03-09,Entertainment,debit,success
+Electricity Bill,2586,2024-03-16,Health,debit,pending
+Uber,4366,2024-03-25,Entertainment,debit,failed
+Amazon,2205,2024-03-26,Shopping,debit,success
