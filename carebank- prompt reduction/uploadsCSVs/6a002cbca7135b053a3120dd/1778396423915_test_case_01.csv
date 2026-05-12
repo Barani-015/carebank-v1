@@ -1,0 +1,61 @@
+Date,Description,Amount,Type,Status
+2024-03-04,Freelance,22449,credit,failed
+2024-03-27,Uber,4527,debit,failed
+2024-03-11,Movie,2322,debit,success
+2024-03-30,Electricity Bill,1143,debit,success
+2024-03-07,Electricity Bill,4777,debit,success
+2024-03-05,Bonus,61554,credit,success
+2024-03-07,Grocery,3594,debit,failed
+2024-03-31,Uber,836,debit,success
+2024-03-04,Uber,4375,debit,success
+2024-03-02,Bonus,22458,credit,success
+2024-03-27,Movie,1110,debit,success
+2024-03-06,Uber,4292,debit,success
+2024-03-19,Uber,939,debit,success
+2024-03-04,Uber,2736,debit,failed
+2024-03-29,Bonus,38896,credit,success
+2024-03-08,Bonus,63910,credit,success
+2024-03-20,Pharmacy,415,debit,success
+2024-03-02,Amazon,4682,debit,success
+2024-03-01,Amazon,3961,debit,success
+2024-03-28,Electricity Bill,2454,debit,success
+2024-03-22,Uber,1167,debit,success
+2024-03-29,Movie,1662,debit,success
+2024-03-29,Electricity Bill,2516,debit,success
+2024-03-10,Grocery,3094,debit,success
+2024-03-24,Movie,2596,debit,failed
+2024-03-09,Electricity Bill,1374,debit,failed
+2024-03-29,Movie,3685,debit,failed
+2024-03-26,Uber,2867,debit,success
+2024-03-22,Amazon,1682,debit,failed
+2024-03-12,Freelance,69005,credit,failed
+2024-03-19,Pharmacy,3614,debit,success
+2024-03-29,Grocery,1051,debit,failed
+2024-03-08,Movie,1182,debit,success
+2024-03-25,Electricity Bill,2787,debit,success
+2024-03-20,Pharmacy,1211,debit,failed
+2024-03-28,Electricity Bill,3393,debit,success
+2024-03-16,Grocery,4092,debit,success
+2024-03-27,Pharmacy,2920,debit,success
+2024-03-15,Electricity Bill,567,debit,success
+2024-03-05,Pharmacy,1046,debit,success
+2024-03-18,Uber,4319,debit,failed
+2024-03-11,Electricity Bill,2259,debit,success
+2024-03-08,Pharmacy,3963,debit,failed
+2024-03-16,Movie,2233,debit,success
+2024-03-20,Uber,3541,debit,success
+2024-03-03,Pharmacy,2326,debit,success
+2024-03-15,Electricity Bill,1831,debit,success
+2024-03-27,Uber,4519,debit,failed
+2024-03-02,Electricity Bill,2301,debit,success
+2024-03-27,Bonus,41156,credit,failed
+2024-03-16,Grocery,1483,debit,success
+2024-03-20,Uber,2962,debit,success
+2024-03-02,Grocery,2606,debit,success
+2024-03-14,Freelance,20075,credit,success
+2024-03-15,Grocery,3597,debit,success
+2024-03-14,Uber,2108,debit,failed
+2024-03-09,Amazon,3694,debit,success
+2024-03-16,Electricity Bill,2586,debit,success
+2024-03-25,Uber,4366,debit,failed
+2024-03-26,Amazon,2205,debit,success

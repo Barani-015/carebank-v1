@@ -1,0 +1,51 @@
+name,amount,date,category,type,status
+Salary Credit,85000,2025-06-01,Income,credit,success
+Amazon Shopping,2499,2025-06-02,Shopping,debit,success
+Swiggy Order,450,2025-06-03,Food,debit,success
+Netflix Subscription,799,2025-06-04,Entertainment,debit,success
+Electricity Bill,1850,2025-06-05,Utilities,debit,success
+Failed UPI Payment,5000,2025-06-06,Transfer,debit,failed
+Grocery Store,3200,2025-06-07,Food,debit,success
+Refund from Flipkart,1500,2025-06-08,Shopping,credit,success
+EMI Payment,15000,2025-06-09,Loan,debit,success
+Interest Credited,1250,2025-06-10,Income,credit,success
+Zomato Order,680,2025-06-11,Food,debit,success
+Uber Ride,350,2025-06-12,Transport,debit,success
+Mobile Recharge,299,2025-06-13,Utilities,debit,success
+Failed Transaction - HDFC,12000,2025-06-14,Transfer,debit,failed
+Freelance Payment,25000,2025-06-15,Income,credit,success
+Petrol,2200,2025-06-16,Transport,debit,success
+Gym Membership,1500,2025-06-17,Health,debit,success
+Dividend Received,3800,2025-06-18,Income,credit,success
+Restaurant Dinner,1800,2025-06-19,Food,debit,success
+Online Course,4999,2025-06-20,Education,debit,success
+Rent Payment,18000,2025-06-21,Housing,debit,success
+Failed Card Payment,8500,2025-06-22,Shopping,debit,failed
+Cashback Received,250,2025-06-23,Income,credit,success
+Book Purchase,599,2025-06-24,Education,debit,success
+Medical Bill,2800,2025-06-25,Health,debit,success
+Bonus Credited,10000,2025-06-26,Income,credit,success
+Water Bill,450,2025-06-27,Utilities,debit,success
+Spotify Subscription,119,2025-06-28,Entertainment,debit,success
+Mutual Fund SIP,5000,2025-06-29,Investment,debit,success
+ATM Withdrawal,3000,2025-06-30,Cash,debit,success
+Salary Credit,85000,2025-07-01,Income,credit,success
+Myntra Shopping,3499,2025-07-02,Shopping,debit,success
+Blinkit Grocery,1200,2025-07-03,Food,debit,success
+Amazon Prime,1499,2025-07-04,Entertainment,debit,success
+Gas Bill,950,2025-07-05,Utilities,debit,success
+Failed Recharge,599,2025-07-06,Utilities,debit,failed
+Coffee Shop,420,2025-07-07,Food,debit,success
+Insurance Premium,6500,2025-07-08,Insurance,debit,success
+Interest Credited,1350,2025-07-09,Income,credit,success
+Ola Ride,280,2025-07-10,Transport,debit,success
+Pharmacy,890,2025-07-11,Health,debit,success
+Freelance Payment,18000,2025-07-12,Income,credit,success
+Movie Tickets,700,2025-07-13,Entertainment,debit,success
+Laptop Accessory,2999,2025-07-14,Shopping,debit,success
+Salary Advance,15000,2025-07-15,Income,credit,success
+Failed EMI,15000,2025-07-16,Loan,debit,failed
+Swiggy Instamart,890,2025-07-17,Food,debit,success
+YouTube Premium,189,2025-07-18,Entertainment,debit,success
+Parking Fee,200,2025-07-19,Transport,debit,success
+Rent Payment,18000,2025-07-20,Housing,debit,success

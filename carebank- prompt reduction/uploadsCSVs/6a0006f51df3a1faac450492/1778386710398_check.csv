@@ -1,0 +1,16 @@
+Date,Description,Amount,Type,Status,Category
+2025-06-10,Amazon Shopping,2499,debit,success,Shopping
+2025-06-09,Uber Ride,450,debit,success,Transport
+2025-06-08,Salary Credit,50000,credit,success,Income
+2025-06-07,Netflix Subscription,799,debit,failed,Entertainment
+2025-06-06,Swiggy Order,350,debit,success,Food
+2025-06-05,Failed Transaction - Amazon,1999,debit,failed,Shopping
+2025-06-04,Interest Credited,1250,credit,success,Income
+2025-06-03,Electricity Bill,1850,debit,success,Utilities
+2025-06-02,Failed UPI Payment,5000,debit,failed,Bank Transfer
+2025-06-01,Refund from Flipkart,1500,credit,success,Shopping
+2025-05-31,Grocery Store,3200,debit,success,Groceries
+2025-05-30,EMI Payment,15000,debit,success,Loan
+2025-05-29,Failed Credit Card Payment,25000,debit,failed,Credit Card
+2025-05-28,Bonus Credit,10000,credit,success,Income
+2025-05-27,Fuel Station,4500,debit,success,Transport

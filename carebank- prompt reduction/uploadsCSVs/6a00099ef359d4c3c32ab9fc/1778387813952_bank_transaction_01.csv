@@ -1,0 +1,11 @@
+transaction_id,date,amount,type,status,description
+T001,2025-04-01,250.00,credit,success,Salary credit
+T002,2025-04-02,50.00,debit,success,ATM withdrawal
+T003,2025-04-03,100.00,credit,failed,Refund failed
+T004,2025-04-03,200.00,credit,success,Bank transfer received
+T005,2025-04-04,75.00,debit,failed,Purchase declined
+T006,2025-04-05,30.00,credit,success,Cashback reward
+T007,2025-04-06,120.00,debit,success,Online shopping
+T008,2025-04-07,500.00,credit,failed,Deposit failed
+T009,2025-04-08,60.00,credit,success,Interest credited
+T010,2025-04-09,40.00,debit,success,Subscription payment

@@ -1,0 +1,11 @@
+Date,Description,Amount,Type,Status
+2025-06-10,Salary Credited,50000,credit,success
+2025-06-09,Amazon Purchase,2499,debit,success
+2025-06-08,Netflix Subscription,799,debit,failed
+2025-06-07,UPI Transfer Failed,5000,debit,failed
+2025-06-06,Restaurant Bill,1500,debit,success
+2025-06-05,Interest Credited,1000,credit,success
+2025-06-04,Failed Amazon Order,3500,debit,failed
+2025-06-03,Grocery Shopping,3200,debit,success
+2025-06-02,Bonus Credit,10000,credit,success
+2025-06-01,EMI Bounce,15000,debit,failed
